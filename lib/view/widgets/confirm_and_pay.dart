@@ -25,3 +25,30 @@ class ConfirmAndPay extends StatelessWidget {
     );
   }
 }
+
+
+
+class Pay extends StatelessWidget {
+  const Pay({super.key, required this.onTap});
+  final GestureTapCallback? onTap;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 50,
+        width: 300,
+        decoration: BoxDecoration(
+          color: ProjectColors.mainColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+          child: Text(
+            "Confirm ",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,132 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../consts/project_colors.dart';
+import 'confirm_and_pay.dart';
+
+class VisaPaymentPage extends StatefulWidget {
+  const VisaPaymentPage({super.key, required this.totalprice});
+final int totalprice;
+  @override
+  State<VisaPaymentPage> createState() => _VisaPaymentPageState();
+}
+
+class _VisaPaymentPageState extends State<VisaPaymentPage> {
+  String cardNumber = '';
+  String expiryDate = '';
+  String cardHolderName = '';
+  String cvvCode = '';
+  bool isCvvFocused = false;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(FontAwesomeIcons.arrowLeft),
+          ),
+          title: Text(
+            "Visa Payment" ,
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CreditCardWidget(
+              cardNumber: cardNumber,
+              expiryDate: expiryDate,
+              cardHolderName: cardHolderName,
+              cvvCode: cvvCode,
+              showBackView: isCvvFocused,
+              cardBgColor: Colors.orangeAccent.shade200,
+              textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600,fontSize: 18), // خلي النص واضح
+              onCreditCardWidgetChange: (brand) {},
+              backCardBorder: Border.all(color:ProjectColors.mainColor,width: 5),
+              frontCardBorder:Border.all(color:ProjectColors.mainColor,width: 6 ) ,
+            ),
+
+            CreditCardForm(
+              formKey: formKey,
+              obscureCvv: false,
+              obscureNumber: false,
+              cardNumber: cardNumber,
+              cvvCode: cvvCode,
+              cardHolderName: cardHolderName,
+              expiryDate: expiryDate,
+              themeColor: Colors.blue,
+              cardNumberDecoration: buildInputDecoration('Card Number', Icons.credit_card),
+              expiryDateDecoration: buildInputDecoration('Expiry Date', Icons.date_range),
+              cvvCodeDecoration: buildInputDecoration('CVV', Icons.lock),
+              cardHolderDecoration: buildInputDecoration('Card Holder', Icons.person),
+              onCreditCardModelChange: onCreditCardModelChange,
+            ),
+
+            const SizedBox(height: 30),
+
+             Padding(
+               padding: const EdgeInsets.only(left: 25.0),
+               child: Align(
+                 alignment: Alignment.centerLeft,
+                 child: Text(
+                   "Total Price : ${widget.totalprice}\$" ,
+                   style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),
+
+                 ),
+               ),
+             ),
+
+            const SizedBox(height: 30),
+
+
+            Pay(
+              onTap:() {
+                if (formKey.currentState!.validate()) {
+                  showDialog(
+                    context: context,
+                    builder: (_) => const AlertDialog(
+                      title: Text("Success"), content: Text("Payment info entered successfully."),),);}},) ,
+
+
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onCreditCardModelChange(CreditCardModel data) {
+    setState(() {
+      cardNumber = data.cardNumber;
+      expiryDate = data.expiryDate;
+      cardHolderName = data.cardHolderName;
+      cvvCode = data.cvvCode;
+      isCvvFocused = data.isCvvFocused;
+    });
+  }
+}
+
+
+
+InputDecoration buildInputDecoration(String label, IconData icon) {
+  return InputDecoration(
+    labelText: label,
+    prefixIcon: Icon(icon),
+    filled: true,
+    fillColor: Colors.grey.shade100,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Colors.grey,width: 2),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Colors.orange, width: 2),
+    ),
+  );
+}

@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:parking_project/view/consts/project_texts.dart';
 import 'package:parking_project/view/consts/project_colors.dart';
 import 'package:parking_project/view/widgets/custom_park_h.dart';
+import 'package:parking_project/view/widgets/payment_screen.dart';
 import 'package:parking_project/view/widgets/vehicle_number.dart';
 import 'package:parking_project/view/widgets/confirm_and_pay.dart';
 
@@ -21,7 +22,7 @@ class ParkingScreen extends StatefulWidget {
 
 class _ParkingScreenState extends State<ParkingScreen> {
   final GlobalKey<FormState> formKey = GlobalKey();
-
+int price_h=20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +84,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
                       ],
                     ),
                     Gap(5),
+
                     Column(
                       children: [
                         CustomParkHorizontal(index: 12),
@@ -95,8 +97,11 @@ class _ParkingScreenState extends State<ParkingScreen> {
                   ],
                 ),
                 Gap(15),
+
                 EntryRoad(),
+
                 Gap(15),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -115,8 +120,10 @@ class _ParkingScreenState extends State<ParkingScreen> {
                 ),
                 Divider(color: ProjectColors.customGrey),
                 ArrivalDate(),
+
                 Divider(color: ProjectColors.customGrey),
                 Hours(),
+
                 Divider(color: ProjectColors.customGrey),
                 VehicleNumber(),
                 Divider(color: ProjectColors.customGrey),
@@ -155,6 +162,10 @@ class _ParkingScreenState extends State<ParkingScreen> {
                           );
                         },
                       );
+                    }
+                    if (counter != 0) {
+                   price_h = counter*price_h;
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisaPaymentPage(totalprice: price_h,),));
                     }
                   },
                 ),
