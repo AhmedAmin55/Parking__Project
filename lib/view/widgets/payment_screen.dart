@@ -44,11 +44,12 @@ class _VisaPaymentPageState extends State<VisaPaymentPage> {
               cardHolderName: cardHolderName,
               cvvCode: cvvCode,
               showBackView: isCvvFocused,
-              cardBgColor: Colors.orangeAccent.shade200,
+              chipColor:Colors.orange ,
+              cardBgColor: Colors.white,
               textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600,fontSize: 18), // خلي النص واضح
               onCreditCardWidgetChange: (brand) {},
-              backCardBorder: Border.all(color:ProjectColors.mainColor,width: 5),
-              frontCardBorder:Border.all(color:ProjectColors.mainColor,width: 6 ) ,
+              backCardBorder: Border.all(color:ProjectColors.mainColor,width: 4),
+              frontCardBorder:Border.all(color:ProjectColors.mainColor,width: 4 ) ,
             ),
 
             CreditCardForm(

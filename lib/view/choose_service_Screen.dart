@@ -4,6 +4,7 @@ import 'package:parking_project/parking_screen.dart';
 import 'package:parking_project/view/consts/project_texts.dart';
 import 'package:parking_project/view/consts/project_images.dart';
 import 'package:parking_project/view/widgets/custom_row_for_choose_service.dart';
+import 'package:parking_project/view/widgets/page4.dart';
 
 class ChooseServiceScreen extends StatelessWidget {
   const ChooseServiceScreen({super.key});
@@ -31,7 +32,7 @@ class ChooseServiceScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return ParkingScreen();
+                          return Page4();
                         },
                       ),
                     ),

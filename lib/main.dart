@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parking_project/view/splash_screen.dart';
 import 'package:parking_project/view/consts/project_colors.dart';
+import 'package:parking_project/view/widgets/page4.dart';
 
 void main() {
   runApp(Parking());
@@ -19,6 +20,7 @@ class Parking extends StatelessWidget {
         ),
       ),
       home: SplashScreen(),
+      // home: Page4(),
     );
   }
 }
