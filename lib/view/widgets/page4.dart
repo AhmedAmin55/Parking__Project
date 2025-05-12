@@ -68,10 +68,12 @@ Widget buildFieldRow(String iconPath, String hint, {IconData? icon}) {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
 
-        Image.asset(iconPath, height: 60),
+        Image.asset(iconPath, height: 80),
+
         const SizedBox(width: 16),
         Expanded(
           child: Container(
+            height: 50,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black87),
@@ -86,7 +88,7 @@ Widget buildFieldRow(String iconPath, String hint, {IconData? icon}) {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.indigo,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                   ),

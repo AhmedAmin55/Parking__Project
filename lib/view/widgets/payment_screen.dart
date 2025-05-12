@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:parking_project/view/thank_you_screen.dart';
 
 import '../consts/project_colors.dart';
+import '../consts/project_images.dart';
 import 'confirm_and_pay.dart';
 
 class VisaPaymentPage extends StatefulWidget {
@@ -46,6 +48,8 @@ class _VisaPaymentPageState extends State<VisaPaymentPage> {
               showBackView: isCvvFocused,
               chipColor:Colors.orange ,
               cardBgColor: Colors.white,
+              obscureCardCvv:false ,
+               // backgroundImage:ProjectImages.managerIcon ,
               textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600,fontSize: 18), // خلي النص واضح
               onCreditCardWidgetChange: (brand) {},
               backCardBorder: Border.all(color:ProjectColors.mainColor,width: 4),
@@ -74,11 +78,23 @@ class _VisaPaymentPageState extends State<VisaPaymentPage> {
                padding: const EdgeInsets.only(left: 25.0),
                child: Align(
                  alignment: Alignment.centerLeft,
-                 child: Text(
-                   "Total Price : ${widget.totalprice}\$" ,
-                   style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),
+                 child:
 
-                 ),
+                 RichText(
+                   text: TextSpan(
+                     text:  "Total Price : ",
+                     style:TextStyle(fontWeight: FontWeight.bold,color: ProjectColors.black,fontSize: 20),
+                     children: [
+                       // TextSpan(text:  , style: ),
+                       TextSpan(text: ' ${widget.totalprice}\$',style: TextStyle(fontWeight: FontWeight.bold ,color: ProjectColors.mainColor,fontSize: 20)),
+                     ],
+                   ),
+                 )
+                 // Text(
+                 //
+                 //   style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,),
+                 //
+                 // ),
                ),
              ),
 
@@ -87,11 +103,22 @@ class _VisaPaymentPageState extends State<VisaPaymentPage> {
 
             Pay(
               onTap:() {
-                if (formKey.currentState!.validate()) {
-                  showDialog(
-                    context: context,
-                    builder: (_) => const AlertDialog(
-                      title: Text("Success"), content: Text("Payment info entered successfully."),),);}},) ,
+                // if (formKey.currentState!.validate()) {
+                //   showDialog(
+                //     context: context,
+                //     builder: (_) => const AlertDialog(
+                //       title: Text("Success"), content: Text("Payment info entered successfully."),),);
+                //
+                //
+                //
+                //
+                //
+                // }
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ThankyouScreen(totalprice: widget.totalprice,),));
+
+
+              },) ,
 
 
             const SizedBox(height: 20),
