@@ -23,6 +23,13 @@ final String name;
 class _ParkingScreenState extends State<ParkingScreen> {
   final GlobalKey<FormState> formKey = GlobalKey();
 int price_h=20;
+  bool isSwitched = false;
+  String selectedOption = 'Indoor Wash';
+
+  final Map<String, dynamic> prices = {
+    'Indoor Wash': 50 ,
+    'Outdoor Wash': 70,
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +50,7 @@ int price_h=20;
             key: formKey,
             child: Column(
               children: [
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -127,6 +135,61 @@ int price_h=20;
                 Divider(color: ProjectColors.customGrey),
                 VehicleNumber(),
                 Divider(color: ProjectColors.customGrey),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Washing',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Switch(
+                      value: isSwitched,
+                      activeColor: ProjectColors.mainColor,
+                      onChanged: (value) {
+                        setState(() {
+                          isSwitched = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                if (isSwitched)
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.grey.shade100,
+                      ),
+                      child: Column(
+                        children: prices.entries.map((entry) {
+                          return RadioListTile<String>(
+                            activeColor: Colors.green,
+
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(entry.key, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                Text("${entry.value} EGP", style: const TextStyle(fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                            value: entry.key,
+                            groupValue: selectedOption,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedOption = value!;
+                              });
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+
+                Divider(color: ProjectColors.customGrey),
                 ConfirmAndPay(
                   onTap: () {
                     if (formKey.currentState!.validate()) {}
@@ -164,11 +227,26 @@ int price_h=20;
                       );
                     }
                     if (counter != 0) {
-                   price_h = counter*price_h;
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisaPaymentPage(totalprice: price_h,name:widget.name ,),));
+                      int basePrice = counter * price_h;
+                      int washingPrice = isSwitched ? prices[selectedOption]  : 0;
+                      int total = basePrice + washingPrice;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VisaPaymentPage(
+                            totalprice: total,
+                            name: widget.name,
+                          ),
+                        ),
+                      );
                     }
+
                   },
                 ),
+
+
+                Gap(10),
               ],
             ),
           ),

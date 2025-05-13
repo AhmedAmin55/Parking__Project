@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_project/parking_screen.dart';
 import 'package:parking_project/view/splash_screen.dart';
 import 'package:parking_project/view/consts/project_colors.dart';
 import 'package:parking_project/view/widgets/page4.dart';
@@ -19,8 +20,8 @@ class Parking extends StatelessWidget {
           selectionHandleColor: ProjectColors.mainColor,
         ),
       ),
-      home: SplashScreen(),
-      // home: Page4(),
+      // home: SplashScreen(),
+      home: ParkingScreen(name: "sd",),
     );
   }
 }
