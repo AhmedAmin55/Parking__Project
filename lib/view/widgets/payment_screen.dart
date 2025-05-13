@@ -8,8 +8,9 @@ import '../consts/project_images.dart';
 import 'confirm_and_pay.dart';
 
 class VisaPaymentPage extends StatefulWidget {
-  const VisaPaymentPage({super.key, required this.totalprice});
+  const VisaPaymentPage({super.key, required this.totalprice, required this.name});
 final int totalprice;
+final String name;
   @override
   State<VisaPaymentPage> createState() => _VisaPaymentPageState();
 }
@@ -49,7 +50,7 @@ class _VisaPaymentPageState extends State<VisaPaymentPage> {
               chipColor:Colors.orange ,
               cardBgColor: Colors.white,
               obscureCardCvv:false ,
-               // backgroundImage:ProjectImages.managerIcon ,
+                 // backgroundImage:ProjectImages.managerIcon ,
               textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600,fontSize: 18), // خلي النص واضح
               onCreditCardWidgetChange: (brand) {},
               backCardBorder: Border.all(color:ProjectColors.mainColor,width: 4),
@@ -115,7 +116,7 @@ class _VisaPaymentPageState extends State<VisaPaymentPage> {
                 //
                 // }
 
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ThankyouScreen(totalprice: widget.totalprice,),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ThankyouScreen(totalprice: widget.totalprice,namee: widget.name,),));
 
 
               },) ,

@@ -14,8 +14,8 @@ import 'package:parking_project/view/widgets/vehicle_number.dart';
 import 'package:parking_project/view/widgets/confirm_and_pay.dart';
 
 class ParkingScreen extends StatefulWidget {
-  const ParkingScreen({super.key});
-
+  const ParkingScreen({super.key, required this.name});
+final String name;
   @override
   State<ParkingScreen> createState() => _ParkingScreenState();
 }
@@ -165,7 +165,7 @@ int price_h=20;
                     }
                     if (counter != 0) {
                    price_h = counter*price_h;
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisaPaymentPage(totalprice: price_h,),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisaPaymentPage(totalprice: price_h,name:widget.name ,),));
                     }
                   },
                 ),

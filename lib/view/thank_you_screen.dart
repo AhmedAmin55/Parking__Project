@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
+import '../models/park_model.dart';
 import 'consts/project_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ThankyouScreen extends StatelessWidget {
-  const ThankyouScreen({super.key, required this.totalprice});
+  const ThankyouScreen({super.key, required this.totalprice, required this.namee});
 final int totalprice;
+final String namee;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,16 +20,19 @@ final int totalprice;
       ),
       body: Transform.translate(
           offset: Offset(0, 30),
-          child: ThankyouBody(price: totalprice,)),
+          child: ThankyouBody(price: totalprice,namee: namee,)),
     );
   }
 }
 
 
 class ThankyouBody extends StatelessWidget {
-   ThankyouBody({super.key, required this.price});
+   ThankyouBody({super.key, required this.price, required this.namee});
 final int price;
-  @override
+
+final String namee;
+
+   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all( 20),
@@ -36,7 +41,7 @@ final int price;
         children: [
 
 
-           ThankyouCard(totalprice: price,),
+           ThankyouCard(totalprice: price,namee: namee,),
 
 
           Positioned(
@@ -104,9 +109,10 @@ class CustomDachedLine extends StatelessWidget {
 
 class ThankyouCard extends StatelessWidget {
   const ThankyouCard({
-    super.key, required this.totalprice,
+    super.key, required this.totalprice, required this.namee,
   });
   final int totalprice;
+  final String namee;
 
   @override
   Widget build(BuildContext context) {
@@ -145,11 +151,11 @@ class ThankyouCard extends StatelessWidget {
 
             const SizedBox(height: 20,),
 
-            PaymentItemInfo(title:"date" , value: DateFormat('d/M/yyyy').format(DateTime.now()) ,),
+            PaymentItemInfo(title:parkList[2].numberOfPark , value: DateFormat('d/M/yyyy').format(DateTime.now()) ,),
             PaymentItemInfo(title:"time" ,
               value: DateFormat('hh:mm a').format(DateTime.now()),
             ),
-            PaymentItemInfo(title:"to" ,value: "Abdelrahman Montaser" ,),
+            PaymentItemInfo(title:"to" ,value: namee ,),
 
             const SizedBox(height: 15,),
 
