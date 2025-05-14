@@ -8,8 +8,9 @@ import '../consts/project_images.dart';
 import 'confirm_and_pay.dart';
 
 class VisaPaymentPage extends StatefulWidget {
-  const VisaPaymentPage({super.key, required this.totalprice, required this.name});
+  const VisaPaymentPage({super.key, required this.totalprice, required this.name, required this.discount});
 final int totalprice;
+final int discount;
 final String name;
   @override
   State<VisaPaymentPage> createState() => _VisaPaymentPageState();
@@ -84,10 +85,20 @@ class _VisaPaymentPageState extends State<VisaPaymentPage> {
                  RichText(
                    text: TextSpan(
                      text:  "Total Price : ",
-                     style:TextStyle(fontWeight: FontWeight.bold,color: ProjectColors.black,fontSize: 20),
+                     style:TextStyle(fontWeight: FontWeight.bold,color: ProjectColors.black,fontSize: 20,
+                     ),
                      children: [
                        // TextSpan(text:  , style: ),
-                       TextSpan(text: ' ${widget.totalprice}\$',style: TextStyle(fontWeight: FontWeight.bold ,color: ProjectColors.mainColor,fontSize: 20)),
+                       TextSpan(text: ' ${widget.totalprice}\$',style:
+                       TextStyle(fontWeight: FontWeight.bold ,color: Colors.grey,fontSize: 20,
+                         decoration: TextDecoration.lineThrough,
+
+
+                       )),
+                       TextSpan(text: ' ${widget.discount}\$',style: TextStyle(
+                           fontWeight: FontWeight.bold ,color: ProjectColors.mainColor,fontSize: 20,
+
+                       )),
                      ],
                    ),
                  )

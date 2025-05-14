@@ -29,6 +29,7 @@ int price_h=20;
   final Map<String, dynamic> prices = {
     'Indoor Wash': 50 ,
     'Outdoor Wash': 70,
+    'In&Out door Wash': 100,
   };
   @override
   Widget build(BuildContext context) {
@@ -227,16 +228,19 @@ int price_h=20;
                       );
                     }
                     if (counter != 0) {
-                      int basePrice = counter * price_h;
-                      int washingPrice = isSwitched ? prices[selectedOption]  : 0;
-                      int total = basePrice + washingPrice;
+                      int Price = (counter * price_h);
+                      int discountedBasePrice = (Price * 0.9).round();
+                      int washingPrice = isSwitched ? prices[selectedOption] : 0;
+                      int total = discountedBasePrice + washingPrice;
+
 
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => VisaPaymentPage(
-                            totalprice: total,
+                            totalprice: Price,
                             name: widget.name,
+                            discount: total,
                           ),
                         ),
                       );

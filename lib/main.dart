@@ -20,8 +20,8 @@ class Parking extends StatelessWidget {
           selectionHandleColor: ProjectColors.mainColor,
         ),
       ),
-      // home: SplashScreen(),
-      home: ParkingScreen(name: "sd",),
+      home: SplashScreen(),
+      // home: ParkingScreen(name: "sd",),
     );
   }
 }
